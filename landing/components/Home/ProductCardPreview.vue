@@ -6,7 +6,7 @@
           <div class="hot">Hot</div>
         </div>
         <div class="product-thumb-hover">
-          <NuxtLink to="/product/123">
+          <NuxtLink to="/products/123">
             <img
               width="600"
               height="600"
@@ -45,7 +45,7 @@
       <div class="products-content">
         <div class="contents text-center">
           <h3 class="product-title">
-            <NuxtLink to="/product/123">Dining Table</NuxtLink>
+            <NuxtLink to="/products/123">Dining Table</NuxtLink>
           </h3>
           <span class="price">$150.00</span>
         </div>

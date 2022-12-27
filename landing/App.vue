@@ -1,9 +1,14 @@
 <template>
   <div>
-    <NuxtLayout> <NuxtPage /> </NuxtLayout>
+    <NuxtLayout>
+      <NuxtLoadingIndicator :duration="10000" />
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 
 <script setup></script>
 
-<style></style>
+<style>
+
+</style>

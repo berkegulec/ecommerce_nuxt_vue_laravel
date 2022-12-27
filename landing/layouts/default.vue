@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="page"
-    class="hfeed page-wrapper"
-    :class="{ 'opacity-style': navMenuStatus.search }"
-  >
+  <div id="page" class="hfeed page-wrapper" :class="{ 'opacity-style': navMenuStatus.search }">
     <!-- Header -->
     <Header />
     <!-- /Header -->
@@ -12,9 +8,8 @@
     <div id="site-main" class="site-main">
       <div id="main-content" class="main-content">
         <div id="primary" class="content-area">
-          <div id="content" class="site-content" role="main"></div>
-          <!-- #content -->
           <slot />
+
         </div>
         <!-- #primary -->
       </div>
@@ -56,4 +51,6 @@ import { useMainStore } from "~~/stores/mainStore";
 const { navMenuStatus } = useMainStore();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

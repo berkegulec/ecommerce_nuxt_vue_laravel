@@ -8,20 +8,8 @@
     <div id="site-main" class="site-main">
       <div id="main-content" class="main-content">
         <div id="primary" class="content-area">
-          <div id="title" class="page-title">
-            <div class="section-container">
-              <div class="content-title-heading">
-                <h1 class="text-title-heading">Bora Armchair</h1>
-              </div>
-              <div class="breadcrumbs">
-                <a href="index.html">Home</a><span class="delimiter"></span
-                ><a href="shop-grid-left.html">Shop</a
-                ><span class="delimiter"></span>Bora Armchair
-              </div>
-            </div>
-          </div>
+          <slot />
 
-          <div id="content" class="site-content" role="main"><slot /></div>
           <!-- #content -->
         </div>
         <!-- #primary -->

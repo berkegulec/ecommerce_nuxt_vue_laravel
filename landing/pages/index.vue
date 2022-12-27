@@ -1,27 +1,33 @@
 <template>
   <!-- Block Sliders -->
-  <TopMainCarousel />
+  <PageContent>
 
-  <!-- Block Product Categories -->
-  <TopProductCategCarousel />
+    <TopMainCarousel />
 
-  <!-- Block Products -->
-  <MiddleBlockProducts />
+    <!-- Block Product Categories -->
+    <TopProductCategCarousel />
 
-  <!-- Block Banners &  Block Posts -->
-  <BottomPostCarousel />
+    <!-- Block Products -->
+    <MiddleBlockProducts />
 
-  <!-- Block Image -->
+    <!-- Block Banners &  Block Posts -->
+    <BottomPostCarousel />
 
-  <BottomBrandsCarousel />
+    <!-- Block Image -->
+
+    <BottomBrandsCarousel />
+  </PageContent>
+
 </template>
 
 <script setup>
-import BottomBrandsCarousel from "~~/components/Carousel/BottomBrandsCarousel.vue";
-import BottomPostCarousel from "~~/components/Carousel/BottomPostCarousel.vue";
-import MiddleBlockProducts from "~~/components/Carousel/MiddleBlockProducts.vue";
-import TopMainCarousel from "~~/components/Carousel/TopMainCarousel.vue";
-import TopProductCategCarousel from "~~/components/Carousel/TopProductCategCarousel.vue";
+import BottomBrandsCarousel from '~~/components/Home/BottomBrandsCarousel.vue';
+import BottomPostCarousel from '~~/components/Home/BottomPostCarousel.vue';
+import MiddleBlockProducts from '~~/components/Home/MiddleBlockProducts.vue';
+import TopMainCarousel from '~~/components/Home/TopMainCarousel.vue';
+import TopProductCategCarousel from '~~/components/Home/TopProductCategCarousel.vue';
+import PageContent from '~~/components/Template/PageContent.vue';
+
 
 
 definePageMeta({
@@ -42,4 +48,6 @@ useHead({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
