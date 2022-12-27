@@ -37,8 +37,8 @@
 </template>
 
 <script setup>
-import { Carousel, Navigation, Slide } from 'vue3-carousel';
-
+import { Carousel, Navigation, Slide } from "vue3-carousel";
+const currentSlide = ref(0);
 </script>
 
 <style lang="scss" scoped></style>
