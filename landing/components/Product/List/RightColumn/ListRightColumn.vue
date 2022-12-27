@@ -5,7 +5,12 @@
     </div>
     <div class="products-topbar-right">
       <div class="products-sort dropdown">
-        <span class="sort-toggle dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Default sorting</span>
+        <span
+          class="sort-toggle dropdown-toggle"
+          data-toggle="dropdown"
+          aria-expanded="true"
+          >Default sorting</span
+        >
         <ul class="sort-list dropdown-menu" x-placement="bottom-start">
           <li class="active">
             <a href="#">Default sorting</a>
@@ -24,19 +29,30 @@
       <ul class="layout-toggle nav nav-tabs">
         <!-- Grid Listing -->
         <li class="nav-item">
-          <a class="layout-grid nav-link cursor-pointer" :class="{ 'active': (activeListingType == listingType.grid) }"
-            @click="activeListingType = listingType.grid">
-            <span class="icon-column"><span class="layer first"><span></span><span></span><span></span></span><span
-                class="layer middle"><span></span><span></span><span></span></span><span
-                class="layer last"><span></span><span></span><span></span></span></span></a>
+          <a
+            class="layout-grid nav-link cursor-pointer"
+            :class="{ active: activeListingType == listingType.grid }"
+            @click="activeListingType = listingType.grid"
+          >
+            <span class="icon-column"
+              ><span class="layer first"><span></span><span></span><span></span></span
+              ><span class="layer middle"><span></span><span></span><span></span></span
+              ><span class="layer last"
+                ><span></span><span></span><span></span></span></span
+          ></a>
         </li>
         <!-- Row Listing -->
         <li class="nav-item">
-          <a class="layout-list nav-link cursor-pointer" :class="{ 'active': (activeListingType == listingType.row) }"
-            @click="activeListingType = listingType.row">
-            <span class="icon-column"><span class="layer first"><span></span><span></span></span><span
-                class="layer middle"><span></span><span></span></span><span
-                class="layer last"><span></span><span></span></span></span></a>
+          <a
+            class="layout-list nav-link cursor-pointer"
+            :class="{ active: activeListingType == listingType.row }"
+            @click="activeListingType = listingType.row"
+          >
+            <span class="icon-column"
+              ><span class="layer first"><span></span><span></span></span
+              ><span class="layer middle"><span></span><span></span></span
+              ><span class="layer last"><span></span><span></span></span></span
+          ></a>
         </li>
       </ul>
     </div>
@@ -44,7 +60,7 @@
 
   <div class="tab-content">
     <div class="tab-pane fade show active" role="tabpanel">
-      <component v-bind:is="activeListingType == listingType.grid ? GridList : RowList"></component>
+      <ProductListRender />
     </div>
   </div>
 
@@ -66,17 +82,13 @@
 </template>
 
 <script setup>
-import GridList from './GridList.vue';
-import RowList from './RowList.vue';
-
+import ProductListRender from "./ProductListRender.vue";
+const props = defineProps(["products"]);
 const listingType = ref({
-  grid: 'grid',
-  row: 'row',
-})
+  grid: "grid",
+  row: "row",
+});
 const activeListingType = ref(listingType.value.grid);
-
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

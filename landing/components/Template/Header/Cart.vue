@@ -12,11 +12,11 @@
       >
         <div class="icons-cart">
           <i class="icon-large-paper-bag"></i
-          ><span class="cart-count">{{ cartItems.length }}</span>
+          ><span class="cart-count">{{ navMenuItems.cart.length }}</span>
         </div>
       </a>
       <div class="dropdown-menu cart-popup">
-        <div class="cart-empty-wrap" v-if="!cartItems.length">
+        <div class="cart-empty-wrap" v-if="!navMenuItems.cart.length">
           <ul class="cart-list">
             <li class="empty">
               <span>No products in the cart.</span>
@@ -28,16 +28,21 @@
         </div>
         <div class="cart-list-wrap" v-else>
           <ul class="cart-list">
-            <li class="mini-cart-item" v-for="(item, index) in cartItems" :key="index">
+            <li
+              class="mini-cart-item"
+              v-for="(item, index) in navMenuItems.cart"
+              :key="index"
+            >
               <a
                 class="remove cursor-pointer"
                 title="Remove this item"
-                @click="removeFromCart(item.id)"
+                @click="removeItemFromCart(item.id)"
               >
                 <i class="icon_close"></i>
               </a>
               <a href="shop-details.html" class="product-image"
                 ><img width="600" height="600" :src="item.img" alt=""
+                style="width: 70px;height: 70px;"
               /></a>
               <a href="shop-details.html" class="product-name">{{ item.name }}</a>
               <div class="quantity">Qty: {{ item.qty }}</div>
@@ -76,12 +81,9 @@
 <script setup>
 import { useMainStore } from "~~/stores/mainStore";
 import { calculateSum } from "~~/utils/calculations_helper";
-const { navMenuItems } = useMainStore();
-const cartItems = ref(navMenuItems.cart);
+const { navMenuItems, removeItemFromCart } = useMainStore();
 
-const cartTotal = computed(() => calculateSum(cartItems.value, "price"));
-
-const removeFromCart = (id) => {};
+const cartTotal = computed(() => calculateSum(navMenuItems.cart, "price"));
 </script>
 
 <style lang="scss" scoped></style>

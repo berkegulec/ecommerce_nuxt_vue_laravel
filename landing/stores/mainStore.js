@@ -1,9 +1,10 @@
+
 export const useMainStore = defineStore('main', () => {
     const navMenuStatus = ref({
         search: false,
         cart: false
     });
-
+    const { $swal } = useNuxtApp()
     const navMenuItems = ref({
         cart: [
             {
@@ -24,6 +25,37 @@ export const useMainStore = defineStore('main', () => {
         wishlist: []
     });
 
+    const addItemToCart = async (id) => {
+        let { data, error } = await useFetch("https://dummyjson.com/products/" + id);
+        let bool = false;
+        if (data.value) {
+            bool = true;
+            navMenuItems.value.cart.push({
+                id: data.value.id,
+                name: data.value.title,
+                qty: 1,
+                price: data.value.price,
+                img: data.value.thumbnail
+            });
 
-    return { navMenuStatus, navMenuItems }
+            $swal.fire({
+                text: 'Product Added To Cart',
+                icon: 'success',
+            })
+        } else {
+            /* TODO : Will be added detailed error handling  */
+            $swal.fire({
+                text: 'Product Not Found',
+                icon: 'success',
+            })
+        }
+        return bool;
+    }
+    const removeItemFromCart = async (id) => {
+        navMenuItems.value.cart = navMenuItems.value.cart.filter(e => e.id != id);
+        return true;
+    }
+
+
+    return { navMenuStatus, navMenuItems, addItemToCart, removeItemFromCart }
 })

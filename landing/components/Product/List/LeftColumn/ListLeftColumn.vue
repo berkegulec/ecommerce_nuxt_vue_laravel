@@ -39,7 +39,11 @@
       <div id="slider-range" class="price-filter-wrap">
         <div class="filter-item price-filter">
           <div class="layout-slider">
-            <Slider v-model="priceRangeSlider.currentValue" :min="priceRangeSlider.min" :max="priceRangeSlider.max" />
+            <Slider
+              v-model="priceRangeSlider.currentValue"
+              :min="priceRangeSlider.min"
+              :max="priceRangeSlider.max"
+            />
           </div>
           <div class="layout-slider-settings"></div>
         </div>
@@ -148,16 +152,14 @@
 </template>
 
 <script setup>
-import Slider from '@vueform/slider'
-import '@vueform/slider/themes/default.css';
+import Slider from "@vueform/slider";
+import "@vueform/slider/themes/default.css";
+
 const priceRangeSlider = ref({
   min: 0,
   max: 200,
-  currentValue: 0
+  currentValue: 0,
 });
-
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
