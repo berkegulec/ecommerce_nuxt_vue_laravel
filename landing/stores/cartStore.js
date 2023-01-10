@@ -18,7 +18,7 @@ export const useCartStore = defineStore('cartStore', () => {
         }
     ]);
 
-    const addItemToCart = async (id) => {
+    const addItemToCart = async (id,qty=1) => {
         let { data, error } = await useFetch("https://dummyjson.com/products/" + id);
         let bool = false;
         if (data.value) {
@@ -26,7 +26,7 @@ export const useCartStore = defineStore('cartStore', () => {
             items.value.push({
                 id: data.value.id,
                 name: data.value.title,
-                qty: 1,
+                qty: qty,
                 price: data.value.price,
                 img: data.value.thumbnail
             });

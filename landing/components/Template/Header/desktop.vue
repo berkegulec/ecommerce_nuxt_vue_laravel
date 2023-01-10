@@ -130,7 +130,7 @@ const menus = [
   },
   {
     name: "Shop",
-    uri: "/products/list",
+    uri: "/products",
   },
   {
     name: "Contact",

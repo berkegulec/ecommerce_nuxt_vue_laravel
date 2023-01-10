@@ -8,7 +8,7 @@
               <div class="hot">Hot</div>
             </div>
             <div class="product-thumb-hover">
-              <NuxtLink :to="productLink(product.id)">
+              <NuxtLink :to="productLink(product)">
                 <img width="600" height="600" :src="product.thumbnail" class="post-image" alt="" />
                 <img width="600" height="600" :src="product.images[1]" class="hover-image back" alt="" />
               </NuxtLink>
@@ -31,7 +31,7 @@
           <div class="products-content">
             <div class="contents text-center">
               <h3 class="product-title">
-                <NuxtLink :to="productLink(product.id)">{{ product.title }}</NuxtLink>
+                <NuxtLink :to="productLink(product)">{{ product.title }}</NuxtLink>
               </h3>
               <span class="price">${{ product.price }}</span>
             </div>
@@ -50,7 +50,7 @@
               <div class="hot">Hot</div>
             </div>
             <div class="product-thumb-hover">
-              <NuxtLink :to="productLink(product.id)">
+              <NuxtLink :to="productLink(product)">
                 <img width="600" height="600" :src="product.thumbnail" class="post-image" alt="" />
                 <img width="600" height="600" :src="product.images[1]" class="hover-image back" alt="" />
               </NuxtLink>
@@ -94,16 +94,18 @@
 </template>
 
 <script setup>
+import { product_link_generator } from '~~/utils/slugify_generator.js'
 import { useProductListStore } from "~~/stores/productListStore";
 import { useCartStore } from "~~/stores/cartStore";
 import { useWishlistStore } from "~~/stores/wishlistStore";
 import { useMainStore } from "~~/stores/mainStore";
-const { currentProductList, currentListingType } = useProductListStore();
+const productStore = useProductListStore();
 const mainStore = useMainStore();
 const wishlistStore = useWishlistStore();
 const cartStore = useCartStore();
-const isGrid = computed(() => currentListingType == "grid");
-const productLink = (id) => `/products/` + id;
+const isGrid = computed(() => productStore.listingType == "grid");
+const productLink = (item) => product_link_generator(item.title, item.id);
+const currentProductList = computed(() => productStore.productList);
 
 const addCart = async (id) => await cartStore.addItemToCart(id);
 const addWishlist = async (id) => (await wishlistStore.addItemToWishlist(id).then(() => mainStore.navMenuStatus.wishlist = true));

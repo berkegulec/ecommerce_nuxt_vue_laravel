@@ -23,17 +23,15 @@ import ListLeftColumn from "~~/components/Product/List/LeftColumn/ListLeftColumn
 import ListRightColumn from "~~/components/Product/List/RightColumn/ListRightColumn.vue";
 import PageContent from "~~/components/Template/PageContent.vue";
 import { useProductListStore } from "~~/stores/productListStore";
-
 const store = useProductListStore();
+await store.sanitizeSearchFilter();
 
-const uri = "";
-await useFetch("https://dummyjson.com/products").then((e) => {
-  store.changeProductList(e.data.value.products);
-});
 
 onUnmounted(() => {
   store.$dispose();
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

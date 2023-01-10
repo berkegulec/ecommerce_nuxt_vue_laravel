@@ -5,15 +5,15 @@
       <a class="dropdown-toggle cart-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <div class="icons-cart">
-          <i class="icon-large-paper-bag"></i><span class="cart-count">{{ cartStore.items.length }}</span>
+          <i class="icon-large-paper-bag"></i><span class="cart-count">{{ storeItems.length }}</span>
         </div>
       </a>
       <div class="dropdown-menu cart-popup">
-        <div class="cart-empty-wrap" v-if="!cartStore.items.length">
+        <div class="cart-empty-wrap" v-if="!storeItems.length">
           <ul class="cart-list">
             <li class="empty">
               <span>No products in the cart.</span>
-              <NuxtLink class="go-shop" to="/products/list">GO TO SHOP<i aria-hidden="true" class="arrow_right"></i>
+              <NuxtLink class="go-shop" to="/products">GO TO SHOP<i aria-hidden="true" class="arrow_right"></i>
               </NuxtLink>
             </li>
           </ul>
@@ -27,8 +27,8 @@
               <a href="shop-details.html" class="product-image"><img width="600" height="600" :src="item.img" alt=""
                   style="width: 70px;height: 70px;" /></a>
               <a href="shop-details.html" class="product-name">{{ item.name }}</a>
-              <div class="quantity">Qty: {{ item.qty }}</div>
-              <div class="price">${{ item.price }}</div>
+              <div class="quantity">Qty: {{ item.qty }} {{ item.qty > 1 ? ` x $${item.price}` : `` }}</div>
+              <div class="price">${{ item.price * item.qty }}</div>
             </li>
           </ul>
           <div class="total-cart">
@@ -68,6 +68,8 @@ const cartStore = useCartStore();
 const storeItems = computed(() => cartStore.items);
 
 const cartTotal = computed(() => calculateSum(storeItems.value, "price"));
+
+
 </script>
 
 <style lang="scss" scoped>

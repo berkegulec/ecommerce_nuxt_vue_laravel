@@ -7,23 +7,8 @@
     <div class="block-content">
       <div class="product-cats-list">
         <ul>
-          <li class="current">
-            <a href="shop-grid-left.html">Bed & Bath <span class="count">9</span></a>
-          </li>
-          <li>
-            <a href="shop-grid-left.html">Furniture <span class="count">4</span></a>
-          </li>
-          <li>
-            <a href="shop-grid-left.html">Home Décor <span class="count">3</span></a>
-          </li>
-          <li>
-            <a href="shop-grid-left.html">Lighting <span class="count">6</span></a>
-          </li>
-          <li>
-            <a href="shop-grid-left.html">Office <span class="count">2</span></a>
-          </li>
-          <li>
-            <a href="shop-grid-left.html">Outdoor <span class="count">4</span></a>
+          <li v-for="item in categoryList">
+            <a class="cursor-pointer" @click="changeFilter(`q`, item)">{{ item }}<span class="count">9</span></a>
           </li>
         </ul>
       </div>
@@ -39,11 +24,7 @@
       <div id="slider-range" class="price-filter-wrap">
         <div class="filter-item price-filter">
           <div class="layout-slider">
-            <Slider
-              v-model="priceRangeSlider.currentValue"
-              :min="priceRangeSlider.min"
-              :max="priceRangeSlider.max"
-            />
+            <Slider v-model="priceRangeSlider.currentValue" :min="priceRangeSlider.min" :max="priceRangeSlider.max" />
           </div>
           <div class="layout-slider-settings"></div>
         </div>
@@ -154,12 +135,23 @@
 <script setup>
 import Slider from "@vueform/slider";
 import "@vueform/slider/themes/default.css";
-
+import { useProductListStore } from "~~/stores/productListStore";
+const route = useRoute();
+const query = route.query;
+const { changeFilter } = useProductListStore();
 const priceRangeSlider = ref({
   min: 0,
   max: 200,
   currentValue: 0,
 });
+
+const { data: categoryList } = await useFetch("https://dummyjson.com/products/categories");
+
+watch(() => route.query, (e) => {
+
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
