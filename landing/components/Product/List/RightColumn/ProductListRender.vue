@@ -1,11 +1,7 @@
 <template>
   <div class="products-list grid" v-if="isGrid">
     <div class="row">
-      <div
-        class="col-xl-4 col-lg-4 col-md-4 col-sm-6"
-        v-for="(product, index) in currentProductList"
-        :key="product.id"
-      >
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6" v-for="(product, index) in currentProductList" :key="product.id">
         <div class="products-entry clearfix product-wapper">
           <div class="products-thumb">
             <div class="product-lable">
@@ -13,38 +9,22 @@
             </div>
             <div class="product-thumb-hover">
               <NuxtLink :to="productLink(product.id)">
-                <img
-                  width="600"
-                  height="600"
-                  :src="product.thumbnail"
-                  class="post-image"
-                  alt=""
-                />
-                <img
-                  width="600"
-                  height="600"
-                  :src="product.images[1]"
-                  class="hover-image back"
-                  alt=""
-                />
+                <img width="600" height="600" :src="product.thumbnail" class="post-image" alt="" />
+                <img width="600" height="600" :src="product.images[1]" class="hover-image back" alt="" />
               </NuxtLink>
             </div>
             <div class="product-button">
               <div class="btn-add-to-cart" data-title="Add to cart">
-                <a class="product-btn button cursor-pointer" @click="addCart(product.id)"
-                  >Add to cart</a
-                >
+                <a class="product-btn button cursor-pointer" @click="addCart(product.id)">Add to cart</a>
               </div>
               <div class="btn-wishlist" data-title="Wishlist">
-                <button class="product-btn">Add to wishlist</button>
+                <button class="product-btn" @click="addWishlist(product.id)">Add to wishlist</button>
               </div>
               <div class="btn-compare" data-title="Compare">
                 <button class="product-btn">Compare</button>
               </div>
               <span class="product-quickview" data-title="Quick View">
-                <a href="#" class="quickview quickview-button"
-                  >Quick View <i class="icon-search"></i
-                ></a>
+                <a href="#" class="quickview quickview-button">Quick View <i class="icon-search"></i></a>
               </span>
             </div>
           </div>
@@ -61,11 +41,8 @@
     </div>
   </div>
   <div class="products-list list" v-else>
-    <div
-      class="products-entry clearfix product-wapper"
-      v-for="(product, index) in currentProductList"
-      :key="product.id"
-    >
+    <div class="products-entry clearfix product-wapper" v-for="(product, index) in currentProductList"
+      :key="product.id">
       <div class="row">
         <div class="col-md-4">
           <div class="products-thumb">
@@ -74,26 +51,12 @@
             </div>
             <div class="product-thumb-hover">
               <NuxtLink :to="productLink(product.id)">
-                <img
-                  width="600"
-                  height="600"
-                  :src="product.thumbnail"
-                  class="post-image"
-                  alt=""
-                />
-                <img
-                  width="600"
-                  height="600"
-                  :src="product.images[1]"
-                  class="hover-image back"
-                  alt=""
-                />
+                <img width="600" height="600" :src="product.thumbnail" class="post-image" alt="" />
+                <img width="600" height="600" :src="product.images[1]" class="hover-image back" alt="" />
               </NuxtLink>
             </div>
             <span class="product-quickview" data-title="Quick View">
-              <a href="#" class="quickview quickview-button"
-                >Quick View <i class="icon-search"></i
-              ></a>
+              <a href="#" class="quickview quickview-button">Quick View <i class="icon-search"></i></a>
             </span>
           </div>
         </div>
@@ -109,12 +72,10 @@
             </div>
             <div class="product-button">
               <div class="btn-add-to-cart" data-title="Add to cart">
-                <a class="product-btn button cursor-pointer" @click="addCart(product.id)"
-                  >Add to cart</a
-                >
+                <a class="product-btn button cursor-pointer" @click="addCart(product.id)">Add to cart</a>
               </div>
               <div class="btn-wishlist" data-title="Wishlist">
-                <button class="product-btn">Add to wishlist</button>
+                <button class="product-btn" @click="addWishlist(product.id)">Add to wishlist</button>
               </div>
               <div class="btn-compare" data-title="Compare">
                 <button class="product-btn">Compare</button>
@@ -134,17 +95,20 @@
 
 <script setup>
 import { useProductListStore } from "~~/stores/productListStore";
+import { useCartStore } from "~~/stores/cartStore";
+import { useWishlistStore } from "~~/stores/wishlistStore";
 import { useMainStore } from "~~/stores/mainStore";
 const { currentProductList, currentListingType } = useProductListStore();
-const { addItemToCart } = useMainStore();
+const mainStore = useMainStore();
+const wishlistStore = useWishlistStore();
+const cartStore = useCartStore();
 const isGrid = computed(() => currentListingType == "grid");
 const productLink = (id) => `/products/` + id;
 
-const addCart = async (id) => {
-  let status = await addItemToCart(id);
-
-  console.log(status);
-};
+const addCart = async (id) => await cartStore.addItemToCart(id);
+const addWishlist = async (id) => (await wishlistStore.addItemToWishlist(id).then(() => mainStore.navMenuStatus.wishlist = true));
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

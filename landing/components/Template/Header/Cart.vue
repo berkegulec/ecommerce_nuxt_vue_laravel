@@ -2,48 +2,30 @@
   <div class="ruper-topcart dropdown light">
     <div class="dropdown mini-cart top-cart">
       <div class="remove-cart-shadow"></div>
-      <a
-        class="dropdown-toggle cart-icon"
-        href="#"
-        role="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
+      <a class="dropdown-toggle cart-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
         <div class="icons-cart">
-          <i class="icon-large-paper-bag"></i
-          ><span class="cart-count">{{ navMenuItems.cart.length }}</span>
+          <i class="icon-large-paper-bag"></i><span class="cart-count">{{ cartStore.items.length }}</span>
         </div>
       </a>
       <div class="dropdown-menu cart-popup">
-        <div class="cart-empty-wrap" v-if="!navMenuItems.cart.length">
+        <div class="cart-empty-wrap" v-if="!cartStore.items.length">
           <ul class="cart-list">
             <li class="empty">
               <span>No products in the cart.</span>
-              <NuxtLink class="go-shop" to="/products/list"
-                >GO TO SHOP<i aria-hidden="true" class="arrow_right"></i
-              ></NuxtLink>
+              <NuxtLink class="go-shop" to="/products/list">GO TO SHOP<i aria-hidden="true" class="arrow_right"></i>
+              </NuxtLink>
             </li>
           </ul>
         </div>
         <div class="cart-list-wrap" v-else>
           <ul class="cart-list">
-            <li
-              class="mini-cart-item"
-              v-for="(item, index) in navMenuItems.cart"
-              :key="index"
-            >
-              <a
-                class="remove cursor-pointer"
-                title="Remove this item"
-                @click="removeItemFromCart(item.id)"
-              >
+            <li class="mini-cart-item" v-for="(item, index) in cartStore.items" :key="index">
+              <a class="remove cursor-pointer" title="Remove this item" @click="cartStore.removeItemFromCart(item.id)">
                 <i class="icon_close"></i>
               </a>
-              <a href="shop-details.html" class="product-image"
-                ><img width="600" height="600" :src="item.img" alt=""
-                style="width: 70px;height: 70px;"
-              /></a>
+              <a href="shop-details.html" class="product-image"><img width="600" height="600" :src="item.img" alt=""
+                  style="width: 70px;height: 70px;" /></a>
               <a href="shop-details.html" class="product-name">{{ item.name }}</a>
               <div class="quantity">Qty: {{ item.qty }}</div>
               <div class="price">${{ item.price }}</div>
@@ -79,11 +61,15 @@
 </template>
 
 <script setup>
-import { useMainStore } from "~~/stores/mainStore";
+import { useCartStore } from "~~/stores/cartStore";
 import { calculateSum } from "~~/utils/calculations_helper";
-const { navMenuItems, removeItemFromCart } = useMainStore();
+const cartStore = useCartStore();
 
-const cartTotal = computed(() => calculateSum(navMenuItems.cart, "price"));
+const storeItems = computed(() => cartStore.items);
+
+const cartTotal = computed(() => calculateSum(storeItems.value, "price"));
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

@@ -10,5 +10,7 @@
 <script setup></script>
 
 <style>
-
+.swal2-container{
+  z-index: 999999999;
+}
 </style>
