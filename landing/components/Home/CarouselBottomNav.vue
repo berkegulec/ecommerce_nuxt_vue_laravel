@@ -10,7 +10,7 @@
         <img
           width="900"
           height="900"
-          src="http://127.0.0.1:8000/vendor/media/product/9.jpg"
+          src="~/assets/media/product/9.jpg"
           alt=""
           title=""
         />
@@ -28,7 +28,7 @@
     <Slide v-for="slide in 10" :key="slide">
       <div class="carousel__item" @click="slideTo(slide - 1)">
         <span class="img-thumbnail-scroll">
-          <img width="600" height="600" src="http://127.0.0.1:8000/vendor/media/product/9-2.jpg" alt="" />
+          <img width="600" height="600" src="~/assets/media/product/9-2.jpg" alt="" />
         </span>
       </div>
     </Slide>

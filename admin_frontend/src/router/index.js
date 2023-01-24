@@ -1,23 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import Dashboard from '../Pages/DasboardView.vue';
+import Login from '../Pages/Auth/Login.vue';
+import { userToken } from '../utils/userStorage_helper';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      component: Login
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      requiresAuth: true
+    },
+  ],
+  linkActiveClass: 'active'
+})
+
+router.beforeEach(async (to, from) => {
+  let isAuthenticated = userToken.hasToken();
+  if (
+    // make sure the user is authenticated
+    !isAuthenticated &&
+    // ❗️ Avoid an infinite redirect
+    (to.path !== '/login' || to.path === '/')
+  ) {
+    // redirect the user to the login page
+    return { path: '/login' }
+  }
+
+  if (isAuthenticated) {
+    console.log(to.path);
+    if (to.path === '/' || to.path === '/login') return { name: 'Dashboard' }
+  }
 })
 
 export default router

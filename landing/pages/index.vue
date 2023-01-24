@@ -35,14 +35,14 @@ definePageMeta({
 });
 useHead({
   script: [
-    { src: "http://127.0.0.1:8000/vendor/libs/slider/js/tmpl.js" },
+    { src: "/js/tmpl.js" },
     {
-      src: "http://127.0.0.1:8000/vendor/libs/slider/js/jquery.dependClass-0.1.js",
+      src: "/js/jquery.dependClass-0.1.js",
     },
-    { src: "http://127.0.0.1:8000/vendor/libs/slider/js/draggable-0.1.js" },
-    { src: "http://127.0.0.1:8000/vendor/libs/slider/js/jquery.slider.js" },
+    { src: "/js/draggable-0.1.js" },
+    { src: "/js/jquery.slider.js" },
     {
-      src: "http://127.0.0.1:8000/vendor/libs/elevatezoom/js/jquery.elevatezoom.js",
+      src: "/js/jquery.elevatezoom.js",
     },
   ],
 });
