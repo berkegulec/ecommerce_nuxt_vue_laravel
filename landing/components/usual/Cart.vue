@@ -62,12 +62,11 @@
 
 <script setup>
 import { useCartStore } from "~~/stores/cartStore";
-import { calculateSum } from "~~/utils/calculations_helper";
 const cartStore = useCartStore();
 
 const storeItems = computed(() => cartStore.items);
 
-const cartTotal = computed(() => calculateSum(storeItems.value, "price"));
+const cartTotal = computed(() => cartStore.getCartTotal);
 
 
 </script>

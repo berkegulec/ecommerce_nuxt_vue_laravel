@@ -21,7 +21,9 @@
 import PageContent from "./components/Template/PageContent.vue";
 const router = useRouter();
 const props = defineProps({ error: Object });
-const handleError = () => clearError({ redirect: router.go(-1) });
+const handleError = () => clearError({ redirect: router.push('/') });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

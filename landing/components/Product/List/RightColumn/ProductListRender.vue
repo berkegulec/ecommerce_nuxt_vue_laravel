@@ -23,8 +23,8 @@
               <div class="btn-compare" data-title="Compare">
                 <button class="product-btn">Compare</button>
               </div>
-              <span class="product-quickview" data-title="Quick View">
-                <a href="#" class="quickview quickview-button">Quick View <i class="icon-search"></i></a>
+              <span class="product-quickview" data-title="Quick View" @click="activateQuickView($event, product.id)">
+                <a class="quickview quickview-button cursor-pointer">Quick View <i class="icon-search"></i></a>
               </span>
             </div>
           </div>
@@ -99,6 +99,7 @@ import { useProductListStore } from "~~/stores/productListStore";
 import { useCartStore } from "~~/stores/cartStore";
 import { useWishlistStore } from "~~/stores/wishlistStore";
 import { useMainStore } from "~~/stores/mainStore";
+import { activateQuickView } from "~~/utils/quickview_helper";
 const productStore = useProductListStore();
 const mainStore = useMainStore();
 const wishlistStore = useWishlistStore();

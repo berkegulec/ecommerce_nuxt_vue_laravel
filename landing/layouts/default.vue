@@ -32,7 +32,7 @@
   <!-- Compare -->
   <Compare />
   <!-- Quickview -->
-  <QuickView />
+  <QuickView v-if="navMenuStatus.quickView" @close-trigger="closeQuickview()" />
   <!-- Page Loader -->
   <PageLoader />
 </template>
@@ -49,6 +49,10 @@ import Wishlist from "~~/components/usual/Wishlist.vue";
 import { useMainStore } from "~~/stores/mainStore";
 
 const { navMenuStatus } = useMainStore();
+
+const closeQuickview = () => {
+  navMenuStatus.quickView = false
+}
 </script>
 
 <style lang="scss" scoped>

@@ -9,14 +9,14 @@
                     @click="(Number(product_qty) - 1) > 0 ? product_qty -= 1 : ``">-</button>
             </div>
             <div class="btn-add-to-cart" @click="addCart">
-                <a class="button" tabindex="0" >Add to cart</a>
+                <a class="button" tabindex="0">Add to cart</a>
             </div>
         </div>
-        <div class="btn-quick-buy" data-title="Wishlist">
+        <div class="btn-quick-buy" data-title="Buy It Now" @click="addCart(true)">
             <button class="product-btn">Buy It Now</button>
         </div>
-        <div class="btn-wishlist" data-title="Wishlist">
-            <button class="product-btn" @click="addWishlist">Add to wishlist</button>
+        <div class="btn-wishlist" data-title="Wishlist" @click="addWishlist">
+            <button class="product-btn">Add to wishlist</button>
         </div>
         <div class="btn-compare" data-title="Compare">
             <button class="product-btn">Compare</button>
@@ -34,7 +34,7 @@ const product_qty = ref(1);
 const mainStore = useMainStore();
 const wishlistStore = useWishlistStore();
 const cartStore = useCartStore();
-const addCart = async () => await cartStore.addItemToCart(props.product_id,product_qty.value);
+const addCart = async (redir = false) => await cartStore.addItemToCart(props.product_id, product_qty.value, redir);
 const addWishlist = async () => (await wishlistStore.addItemToWishlist(props.product_id).then(() => mainStore.navMenuStatus.wishlist = true));
 
 </script>

@@ -21,7 +21,6 @@ class AuthorizationController extends Controller
         ]);
 
         if ($validation->fails()) {
-            echo "girdi";
             return Responder::send_unprocessable("", $validation->errors());
         }
 

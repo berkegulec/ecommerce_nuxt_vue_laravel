@@ -4,7 +4,7 @@
       <div class="wishlist-popup-content">
         <div class="wishlist-popup-content-top">
           <span class="wishlist-name">Wishlist</span>
-          <span class="wishlist-count-wrapper"><span class="wishlist-count">2</span></span>
+          <span class="wishlist-count-wrapper"><span class="wishlist-count">{{ wishlistItems.length }}</span></span>
           <span class="wishlist-popup-close" @click="toggleWishlistPopup"></span>
         </div>
         <div class="wishlist-popup-content-mid">

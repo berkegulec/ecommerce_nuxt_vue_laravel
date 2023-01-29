@@ -1,5 +1,6 @@
-import { ref } from 'vue'
+import { calculateSum } from "~~/utils/calculations_helper";
 export const useCartStore = defineStore('cartStore', () => {
+    const router = useRouter();
     const { $swal } = useNuxtApp();
     const items = ref([
         {
@@ -18,11 +19,14 @@ export const useCartStore = defineStore('cartStore', () => {
         }
     ]);
 
-    const addItemToCart = async (id,qty=1) => {
+
+    //after backend build push cart and get server cart data. Method calculations will be made on backend
+    const addItemToCart = async (id, qty = 1, redir = false) => {
         let { data, error } = await useFetch("https://dummyjson.com/products/" + id);
         let bool = false;
         if (data.value) {
             bool = true;
+
             items.value.push({
                 id: data.value.id,
                 name: data.value.title,
@@ -34,12 +38,14 @@ export const useCartStore = defineStore('cartStore', () => {
             $swal.fire({
                 text: 'Product Added To Cart',
                 icon: 'success',
+            }).then(() => {
+                if (redir) router.push('/cart');
             })
         } else {
             /* TODO : Will be added detailed error handling  */
             $swal.fire({
                 text: 'Product Not Found',
-                icon: 'success',
+                icon: 'error',
             })
         }
         return bool;
@@ -48,5 +54,17 @@ export const useCartStore = defineStore('cartStore', () => {
         items.value = items.value.filter(e => e.id != id);
         return true;
     }
-    return { items, addItemToCart, removeItemFromCart }
+
+    const changeQtyCartItem = (id, qty) => {
+        items.value = items.value.map(element => {
+            if (element.id == id) {
+                element.qty = qty;
+            }
+            return element;
+        });
+    }
+
+    const getCartTotal = computed(() => calculateSum(items.value, "price"));
+
+    return { items, getCartTotal, addItemToCart, removeItemFromCart, changeQtyCartItem }
 })

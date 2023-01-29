@@ -32,6 +32,7 @@ export default defineNuxtConfig({
         '~/assets/libs/slick/css/slick-theme.css',
         '~/assets/libs/mmenu/css/mmenu.min.css',
         '~/assets/css/app.css',
+        '~/assets/css/custom.css',
         '~/assets/css/responsive.css',
         'vue3-carousel/dist/carousel.css'
     ],
