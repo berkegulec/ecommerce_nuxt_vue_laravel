@@ -1,5 +1,5 @@
 <template>
-  <div class="card-overlay" v-if="loading"><i class="icon-spinner9 spinner text-body"></i></div>
+  <div class="card-overlay" v-if="loading"><i class="icon-spinner9 spinner text-body icon-3x"></i></div>
 </template>
 
 <script setup>

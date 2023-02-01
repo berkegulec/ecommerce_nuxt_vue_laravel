@@ -55,68 +55,7 @@ const App = function () {
     // On desktop
     //
 
-    // Resize main sidebar
-    const sidebarMainResize = function() {
-
-        // Elements
-        const sidebarMainElement = $('.sidebar-main'),
-              sidebarMainToggler = $('.sidebar-main-resize'),
-              resizeClass = 'sidebar-main-resized',
-              unfoldClass = 'sidebar-main-unfold';
-
-
-        // Define variables
-        const unfoldDelay = 150;
-        let timerStart,
-            timerFinish;
-
-        // Toggle classes on click
-        sidebarMainToggler.on('click', function(e) {
-            sidebarMainElement.toggleClass(resizeClass);
-            !sidebarMainElement.hasClass(resizeClass) && sidebarMainElement.removeClass(unfoldClass);
-        });
-
-        // Add class on mouse enter
-        sidebarMainElement.on('mouseenter', function() {
-            clearTimeout(timerFinish);
-            timerStart = setTimeout(function() {
-                sidebarMainElement.hasClass(resizeClass) && sidebarMainElement.addClass(unfoldClass);
-            }, unfoldDelay);
-        });
-
-        // Remove class on mouse leave
-        sidebarMainElement.on('mouseleave', function() {
-            clearTimeout(timerStart);
-            timerFinish = setTimeout(function() {
-                sidebarMainElement.removeClass(unfoldClass);
-            }, unfoldDelay);
-        });
-    };
-
-    // Toggle main sidebar
-    const sidebarMainToggle = function() {
-
-        // Elements
-        const sidebarMainElement = $('.sidebar-main'),
-              sidebarMainRestElements = $('.sidebar:not(.sidebar-main):not(.sidebar-component)'),
-              sidebarMainDesktopToggler = $('.sidebar-main-toggle'),
-              sidebarMainMobileToggler = $('.sidebar-mobile-main-toggle'),
-              sidebarCollapsedClass = 'sidebar-collapsed',
-              sidebarMobileExpandedClass = 'sidebar-mobile-expanded';
-
-        // On desktop
-        sidebarMainDesktopToggler.on('click', function(e) {
-            e.preventDefault();
-            sidebarMainElement.toggleClass(sidebarCollapsedClass);
-        });                
-
-        // On mobile
-        sidebarMainMobileToggler.on('click', function(e) {
-            e.preventDefault();
-            sidebarMainElement.toggleClass(sidebarMobileExpandedClass);
-            sidebarMainRestElements.removeClass(sidebarMobileExpandedClass);
-        });                
-    };
+  
 
     // Toggle secondary sidebar
     const sidebarSecondaryToggle = function() {
@@ -494,8 +433,6 @@ const App = function () {
 
         // Initialize all sidebars
         initSidebars: function() {
-            sidebarMainResize();
-            sidebarMainToggle();
             sidebarSecondaryToggle();
             sidebarRightToggle();
             sidebarComponentToggle();

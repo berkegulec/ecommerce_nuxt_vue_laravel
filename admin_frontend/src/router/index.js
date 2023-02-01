@@ -1,25 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Dashboard from '../Pages/DasboardView.vue';
-import Login from '../Pages/Auth/Login.vue';
 import { userToken } from '../utils/userStorage_helper';
+import { RouteGenerator } from '../utils/routing_tool';
+
+import Login from '../Pages/Auth/Login.vue';
+import NotFound from '../Pages/NotFound.vue';
+import Dashboard from '../Pages/DasboardView.vue';
+
+import ProductRoutes from './R_Product'
+import UsersRoutes from './R_Users'
+
+const generatedRoutes = [
+  RouteGenerator('/login', Login),
+  RouteGenerator('/dashboard', Dashboard, null, true),
+  ...ProductRoutes,
+  ...UsersRoutes,
+  RouteGenerator('/:pathMatch(.*)*', NotFound),
+];
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      component: Login
-    },
-    {
-      path: '/login',
-      component: Login
-    },
-    {
-      path: '/Dashboard',
-      name: 'Dashboard',
-      component: Dashboard,
-      requiresAuth: true
-    },
-  ],
+  routes: generatedRoutes,
   linkActiveClass: 'active'
 })
 
@@ -36,7 +36,6 @@ router.beforeEach(async (to, from) => {
   }
 
   if (isAuthenticated) {
-    console.log(to.path);
     if (to.path === '/' || to.path === '/login') return { name: 'Dashboard' }
   }
 })

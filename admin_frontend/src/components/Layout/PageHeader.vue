@@ -4,48 +4,34 @@
       <div class="page-title d-flex">
         <h4>
           <i class="icon-arrow-left52 mr-2"></i>
-          <span class="font-weight-semibold">Home</span> - Dashboard
+          <span class="font-weight-semibold">{{ firstTitle }}</span> {{ secTitle }}
         </h4>
-        <a href="#" class="header-elements-toggle text-body d-lg-none"
-          ><i class="icon-more"></i
-        ></a>
+        <a href="#" class="header-elements-toggle text-body d-lg-none"><i class="icon-more"></i></a>
       </div>
 
-      <div class="header-elements d-none text-center text-lg-left mb-3 mb-lg-0">
-        <div class="btn-group">
-          <button type="button" class="btn btn-indigo">
-            <i class="icon-stack2 mr-2"></i> New report
-          </button>
-          <button
-            type="button"
-            class="btn btn-indigo dropdown-toggle"
-            data-toggle="dropdown"
-          ></button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header">Actions</div>
-            <a href="#" class="dropdown-item"
-              ><i class="icon-file-eye"></i> View reports</a
-            >
-            <a href="#" class="dropdown-item"
-              ><i class="icon-file-plus"></i> Edit reports</a
-            >
-            <a href="#" class="dropdown-item"
-              ><i class="icon-file-stats"></i> Statistics</a
-            >
-            <div class="dropdown-header">Export</div>
-            <a href="#" class="dropdown-item"
-              ><i class="icon-file-pdf"></i> Export to PDF</a
-            >
-            <a href="#" class="dropdown-item"
-              ><i class="icon-file-excel"></i> Export to CSV</a
-            >
-          </div>
-        </div>
-      </div>
+      <HeaderButtonsWrapper>
+        <slot />
+      </HeaderButtonsWrapper>
+
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+import HeaderButtonsWrapper from '../Elements/HeaderButtons/HeaderButtonsWrapper.vue';
+const props = defineProps({
+  firstTitle: {
+    type: String,
+  },
+  secondTitle: {
+    type: String,
+  },
+});
 
-<style lang="scss" scoped></style>
+const secTitle = computed(() => props.secondTitle ? `-${props.secondTitle}` : ``);
+</script>
+
+<style lang="scss" scoped>
+
+</style>
